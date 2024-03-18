@@ -25,15 +25,15 @@
 </header-->
 
 <header class="header">
-  <nav *ngIf="isWebView">
+  <nav class="nav-web">
     <ul>
       <li><a routerLink="/">Inicio</a></li>
       <li><a routerLink="/hero-cards">Heroes</a></li>
       <li><a routerLink="/bystanders-cards">ByStanders</a></li>
     </ul>
   </nav>
-  <button *ngIf="isMobileView" (click)="toggleMenu()" class="menu-button">Menú</button>
-  <div class="mobile-menu-overlay" *ngIf="isMobileView && isMenuOpen">
+  <button (click)="toggleMenu()" class="menu-button nav-mobile">Menú</button>
+  <div class="mobile-menu-overlay" *ngIf="isMenuOpen">
     <div class="mobile-menu">
       <button class="close-button" (click)="toggleMenu()">Cerrar</button>
       <ul>

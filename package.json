@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:custom-boardgame": "node dist/custom-boardgame/server/server.mjs"
+    "serve:ssr:custom-boardgame": "node dist/custom-boardgame/server/server.mjs",
+    "build:prod": "ng build --configuration=production --base-href /custom-zombicide-web-ui.github.io/"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +24,7 @@
     "@angular/ssr": "^17.3.0",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
+    "angular-cli-ghpages": "^2.0.0-beta.2",
     "bootstrap": "^5.3.2",
     "express": "^4.18.2",
     "rxjs": "~7.8.0",

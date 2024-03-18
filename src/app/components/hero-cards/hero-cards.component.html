@@ -165,7 +165,7 @@
     <div class="hero--container">
       <div *ngFor="let player of filteredZombiePlayers" class="card hero--card">
         <img class="card-img-top hero--card--img" src="https://lh3.googleusercontent.com/d/{{ player.id }}?authuser=0"
-             (click)="openFullscreen(content, player)">
+             (click)="openFullscreen(content, player)" alt="">
         <div class="card-body hero--card--footer">
           <span class="hero--card--footer--badge-1">{{ player.heroType }}</span>
           <span class="hero--card--footer--badge-2">{{ player.affiliation }}</span>

@@ -1,4 +1,4 @@
-import {RoleEnum} from "../enum/./role.enum";
+import {RoleEnum} from "../enum/role.enum";
 import {AffiliationEnum} from "../enum/affiliation.enum";
 import {SideEnum} from "../enum/side.enum";
 import {AttackRangeEnum} from "../enum/attackRange.enum";

@@ -121,7 +121,6 @@ export class HeroCardsComponent   implements OnInit {
 
 
   test() {
-    this.showFiltersMobile = !this.showFiltersMobile;
     const roleSelected = this.selected(this.selectedOptionsRole);
     const affiliationSelected = this.selected(this.selectedOptionsAffiliation);
     const atkRangeSelected = this.selected(this.selectedOptionsAtkRange);
