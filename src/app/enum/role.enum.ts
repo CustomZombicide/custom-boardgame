@@ -1,5 +1,6 @@
 export enum RoleEnum {
-  DMG="Daño" ,
+  FREE_ACTION= "Acción gratis",
+  DMG_BOOST="Daño" ,
   TANK="Tanque" ,
   UTILITY="Utilidad",
   SPEED="Movilidad",

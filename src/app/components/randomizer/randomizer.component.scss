@@ -68,11 +68,6 @@
   }
 }
 
-.card-body {
-  padding: 0;
-  flex:0;
-}
-
 .zombie-search {
   display: flex;
   flex-direction: column;
@@ -187,107 +182,33 @@
   }
 }
 
-.custom-input-container {
+.randomizer {
+  &--box {
+    display: initial;
+    @media (max-width: 768px) {
+      display: flex;
+    }
+    &--btn {
+      margin-top: 8px;
+      width: 100%;
+      @media (max-width: 768px) {
+        width: 50%;
+      }
+
+    }
+  }
+}
+
+.input-container {
   position: relative;
-}
+  width: 100%;
 
-.input-field {
-  padding: 10px 30px; /* Ajuste de espaciado para acomodar el botón */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  width: 300px; /* Puedes ajustar el ancho según tu preferencia */
-  outline: none;
-}
-
-.button {
-  position: absolute;
-  top: 40%;
-  right: 10px;
-  transform: translateY(-50%);
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-/* Efectos de hover para el botón */
-.button:hover {
-  color: #ff0000; /* Cambiar color al pasar el ratón por encima */
-}
-
-.checkbox-group {
-  display: flex;
-  flex-direction: column;
-
-  label {
-    margin-bottom: 5px;
-  }
-
-  input[type="checkbox"] {
-    margin-right: 5px;
-  }
-}
-
-.button-group {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-[class^="option-button"] {
-  padding: 5px 10px;
-  border: 0.5px solid black;
-  background-color: #f0f0f0;
-  cursor: pointer;
-}
-
-[class^="option-button"].selected {
-  border: 0.5px solid white;
-  color: white;
-}
-
-.option-button-1.selected {
-  background-color: #9b5fe0;
-}
-
-.option-button-2.selected {
-  background-color: #16a4d8;
-}
-
-.option-button-3.selected {
-  background-color: #60dbe8;
-}
-
-.option-button-4.selected {
-  background-color: #d37c46;
-}
-
-.option-button-5.selected {
-  background-color: #485eef;
-}
-
-.option-button-6.selected {
-  background-color: #f9a52c;
-}
-
-.option-button-7.selected {
-  background-color: #d64e12;
-}
-
-[class^="option-button"]:focus {
-  outline: none;
-}
-
-.pagination-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.not-found {
-  margin: 16px;
-  @media (min-width: 700px) {
-    margin: 32px;
-    padding-left: 240px;
+  &--field {
+    padding: 10px 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    outline: none;
   }
 }

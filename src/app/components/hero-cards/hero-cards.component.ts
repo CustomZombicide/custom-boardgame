@@ -1,7 +1,7 @@
 import {Component, inject, OnInit, TemplateRef} from '@angular/core';
 import {Players} from "../../constant/players";
 import {CommonModule} from "@angular/common";
-import {NgbActiveModal, NgbInputDatepicker, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbActiveModal, NgbInputDatepicker, NgbModal, NgbPagination} from "@ng-bootstrap/ng-bootstrap";
 import {HeroModel} from "../../model/hero.model";
 import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RoleEnum} from "../../enum/role.enum";
@@ -15,7 +15,7 @@ import {ThrowsEnum} from "../../enum/throws.enum";
 @Component({
   selector: 'app-hero-cards',
   standalone: true,
-  imports: [CommonModule, NgbInputDatepicker, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, NgbInputDatepicker, ReactiveFormsModule, FormsModule, NgbPagination],
   providers: [NgbActiveModal],
   templateUrl: './hero-cards.component.html',
   styleUrl: './hero-cards.component.scss'
@@ -49,6 +49,10 @@ export class HeroCardsComponent   implements OnInit {
   selectedOptionsThrows: { [key: string]: boolean } = {};
   selectedOptionsAtkRange: { [key: string]: boolean } = {};
   selectedOptionsSide: { [key: string]: boolean } = {};
+  pagedItems: HeroModel[] = [];
+  currentPage = 1;
+  itemsPerPage = 12;
+  enableCardSection = true;
 
 
   private modalService = inject(NgbModal);
@@ -84,13 +88,13 @@ export class HeroCardsComponent   implements OnInit {
     this.filteredZombiePlayers = this.zombiePlayers;
     this.zombiePlayers.sort((a, b) => a.name.localeCompare(b.name));
     this.zombiePlayers.sort((a, b) => a.heroType.localeCompare(b.heroType));
+    this.setPage(1);
 
     // Subscribe to changes in searchTextControl
     this.searchTextControl.valueChanges.subscribe((value) => {
       if(value!==null) {
         this.showXBtn = value !== '';
         this.filterZombiePlayers(value);
-
       }
     });
   }
@@ -104,6 +108,7 @@ export class HeroCardsComponent   implements OnInit {
     this.filteredZombiePlayers = this.zombiePlayers.filter(player =>
       player.name.toLowerCase().includes(searchText.toLowerCase())
     );
+    this.setPage(1)
   }
 
   toggleFiltersMobile(): void {
@@ -157,9 +162,23 @@ export class HeroCardsComponent   implements OnInit {
         player.throws.includes(throwsSelected as ThrowsEnum)
       )
     );
+
+    console.log("this.filteredZombiePlayers", this.filteredZombiePlayers.length)
+    this.enableCardSection = this.filteredZombiePlayers.length !== 0;
+    this.setPage(1);
   }
   toggleOption(selectedOptions: { [key: string]: boolean },option: string): void {
     selectedOptions[option] = !selectedOptions[option];
+  }
+
+  pageChanged(page: number): void {
+    this.setPage(page);
+  }
+
+  setPage(page: number): void {
+    const startIndex = (page - 1) * this.itemsPerPage;
+    this.pagedItems = this.filteredZombiePlayers.slice(startIndex, startIndex + this.itemsPerPage);
+    this.currentPage = page;
   }
 
 }

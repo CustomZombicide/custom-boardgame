@@ -160,25 +160,37 @@
     <!-- Display search results -->
 
   </div>
-
-  <div class="hero">
-    <div class="hero--container">
-      <div *ngFor="let player of filteredZombiePlayers" class="card hero--card">
-        <img class="card-img-top hero--card--img" src="https://lh3.googleusercontent.com/d/{{ player.id }}?authuser=0"
-             (click)="openFullscreen(content, player)" alt="">
-        <div class="card-body hero--card--footer">
-          <span class="hero--card--footer--badge-1">{{ player.heroType }}</span>
-          <span class="hero--card--footer--badge-2">{{ player.affiliation }}</span>
-          <span class="hero--card--footer--badge-3">{{ player.side }}</span>
-          <span class="hero--card--footer--badge-4" *ngFor="let role of player.role">{{ role }}</span>
-          <span class="hero--card--footer--badge-5">Rango {{ player.attackRange }}</span>
-          <span class="hero--card--footer--badge-6">{{ player.numberOfDice }} dados</span>
-          <span class="hero--card--footer--badge-7">Tiradas {{ player.throws }}</span>
+  <div *ngIf="enableCardSection">
+    <div class="pagination-container">
+      <ngb-pagination [collectionSize]="filteredZombiePlayers.length" [(page)]="currentPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" (pageChange)="pageChanged($event)" class="pagination"></ngb-pagination>
+    </div>
+    <div class="hero">
+      <div class="hero--container">
+        <div *ngFor="let player of pagedItems" class="card hero--card">
+          <img class="card-img-top hero--card--img" src="https://lh3.googleusercontent.com/d/{{ player.id }}?authuser=0"
+               (click)="openFullscreen(content, player)" alt="">
+          <div class="card-body hero--card--footer">
+            <span class="hero--card--footer--badge-1">{{ player.heroType }}</span>
+            <span class="hero--card--footer--badge-2">{{ player.affiliation }}</span>
+            <span class="hero--card--footer--badge-3">{{ player.side }}</span>
+            <span class="hero--card--footer--badge-4" *ngFor="let role of player.role">{{ role }}</span>
+            <span class="hero--card--footer--badge-5">Rango {{ player.attackRange }}</span>
+            <span class="hero--card--footer--badge-6">{{ player.numberOfDice }} dados</span>
+            <span class="hero--card--footer--badge-7">Tiradas {{ player.throws }}</span>
+          </div>
         </div>
       </div>
     </div>
+    <div class="pagination-container">
+      <ngb-pagination [collectionSize]="filteredZombiePlayers.length" [(page)]="currentPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" (pageChange)="pageChanged($event)" class="pagination"></ngb-pagination>
+    </div>
+  </div>
+  <div *ngIf="!enableCardSection" class="not-found">
+    No se encontraron resultados para esta búsqueda
   </div>
 </div>
+
+
 
 <ng-template #content let-modal>
   <div class="modal-content">

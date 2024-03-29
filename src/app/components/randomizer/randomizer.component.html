@@ -1,0 +1,56 @@
+<div class="zombie-search">
+
+  <div class="input-container">
+    <input type="number" [(ngModel)]="numberOfPlayers" placeholder="# de personajes"
+           class="input-container--field"  min="1" max="12">
+  </div>
+
+  <div class="filters randomizer">
+    <div class="randomizer--box">
+      <button class="randomizer--box--btn" (click)="randomize(HeroTypeEnum.SURVIVOR)">Generar Héroe</button>
+      <button class="randomizer--box--btn" (click)="randomize(HeroTypeEnum.ZOMBIE)">Generar Zombie</button>
+    </div>
+  </div>
+
+  <!-- Mobile: Collapsible advanced options -->
+  <div class="filters-mobile randomizer">
+    <div class="randomizer--box">
+      <button class="randomizer--box--btn" (click)="randomize(HeroTypeEnum.SURVIVOR)">Generar Héroe</button>
+      <button class="randomizer--box--btn" (click)="randomize(HeroTypeEnum.ZOMBIE)">Generar Zombie</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="enableCard" class="hero">
+  <div class="hero--container">
+    <div *ngFor="let player of randomSelections" class="card hero--card">
+      <img class="card-img-top hero--card--img" src="https://lh3.googleusercontent.com/d/{{ player.id }}?authuser=0"
+           (click)="openFullscreen(content, player)" alt="">
+      <div class="card-body hero--card--footer">
+        <span class="hero--card--footer--badge-1">{{ player.heroType }}</span>
+        <span class="hero--card--footer--badge-2">{{ player.affiliation }}</span>
+        <span class="hero--card--footer--badge-3">{{ player.side }}</span>
+        <span class="hero--card--footer--badge-4" *ngFor="let role of player.role">{{ role }}</span>
+        <span class="hero--card--footer--badge-5">Rango {{ player.attackRange }}</span>
+        <span class="hero--card--footer--badge-6">{{ player.numberOfDice }} dados</span>
+        <span class="hero--card--footer--badge-7">Tiradas {{ player.throws }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="mb-3">
+          <img class="card-img-top" src="https://lh3.googleusercontent.com/d/{{ this.hero?.id }}?authuser=0" alt="Card image cap">
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
